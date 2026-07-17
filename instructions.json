@@ -1,0 +1,48 @@
+{
+    "robot": "ReBeL 6DOF",
+    "instructions": 
+    [
+        {
+            "name": "instruction-01 (zero position)",
+            "type": "joint",
+            "pos": {"A1": 0.0, "A2": 0.0, "A3": 0.0, "A4": 0.0, "A5": 0.0, "A6": 0.0},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction-02 (L position)",
+            "type": "joint",
+            "pos": {"A3": 90.0, "A5": 90.0},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction- Pick Up",
+            "type": "base",
+            "pos": {"X": 300.0, "Y": 0.0, "Z": 200.0 , "A":  180.0, "B":  0.0 , "C":  180},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction-03 (go to left)",
+            "type": "joint",
+            "pos": {"A1": -90.0},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction-04 (go to right)",
+            "type": "joint",
+            "pos": {"A1": 90.0},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction-05 (L position)",
+            "type": "joint",
+            "pos": {"A1": 0.0},
+            "vel": 100.0
+        },
+        {
+            "name": "instruction-06 (zero position)",
+            "type": "joint",
+            "pos": {"A3": 0.0, "A5": 0.0},
+            "vel": 100.0
+        }
+    ]
+}
