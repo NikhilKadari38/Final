@@ -25,8 +25,8 @@ TOPIC_BASE   = f"IGUS/robot{ROBOT_NUMBER}"
 TOPIC_SORT   = TOPIC_BASE + "/sort"
 TOPIC_STATUS = TOPIC_BASE + "/status"
 
-GRASP_Z    = 148.5   # Z where suction cup touches top of box (measured)
-TRAVEL_Z   = 280.0   # safe travel height — well above all boxes
+GRASP_Z    = 156.5   # Z where suction cup touches top of box (measured)
+TRAVEL_Z   = 290.0   # safe travel height — well above all boxes
 BOX_HEIGHT = 50.0    # actual box height = 5cm = 50mm
 
 SUCTION_CHANNEL = 31  # ToolDOut2 (DOut32) — confirmed working

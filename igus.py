@@ -220,6 +220,7 @@ class IGUS(object):
         self.wait = False
         self.callback_read_msg = None
         self.callback_cnt_msg = None
+        self.__send_lock = threading.Lock()
 
     def setopts(self, **kwargs):
         if "host" in kwargs:
@@ -272,8 +273,9 @@ class IGUS(object):
         """
         if not self.__sock:
             raise ConnectionError("Socket is not connected. Please connect first.")
-        
-        self.__sock.sendall(command.encode('utf-8'))
+
+        with self.__send_lock:
+            self.__sock.sendall(command.encode('utf-8'))
         time.sleep(0.1)
 
     def go_to(self, pos: Joint | Cart, vel=50.0):
