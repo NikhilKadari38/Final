@@ -25,7 +25,7 @@ TOPIC_BASE   = f"IGUS/robot{ROBOT_NUMBER}"
 TOPIC_SORT   = TOPIC_BASE + "/sort"
 TOPIC_STATUS = TOPIC_BASE + "/status"
 
-GRASP_Z    = 151   # Z where suction cup touches top of box (measured)
+GRASP_Z    = 148.5   # Z where suction cup touches top of box (measured)
 TRAVEL_Z   = 280.0   # safe travel height — well above all boxes
 BOX_HEIGHT = 50.0    # actual box height = 5cm = 50mm
 
@@ -91,12 +91,8 @@ def go_to_and_confirm(pos, vel, target: dict, getter, max_retries=3, **wait_kwar
                        f"attempts — halting for safety.")
 
 
-_dout_cmd_id = igus.CommandID()
-
-
 def _set_dout(channel: int, state: bool):
-    state_str = "true" if state else "false"
-    robot.send(f"CRISTART {_dout_cmd_id.get_id()} CMD DOUT {channel} {state_str} CRIEND")
+    robot.send(igus.Command.dout(channel, state))
 
 
 def gripper_open():

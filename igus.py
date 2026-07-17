@@ -123,7 +123,7 @@ class CommandID():
         """
         Increases the command ID by 1, wrapping around to 0 if it exceeds 9999.
         """
-        if self.__id > 9999:
+        if self.__id >= 9999:
             self.__id = 0
         else:
             self.__id += 1
@@ -200,6 +200,11 @@ class Command():
     @staticmethod
     def active_multiple_clients():
         return f"CRISTART {Command.__command_id.get_id()} CMD SetActive true CRIEND"
+
+    @staticmethod
+    def dout(channel: int, state: bool):
+        state_str = "true" if state else "false"
+        return f"CRISTART {Command.__command_id.get_id()} CMD DOUT {channel} {state_str} CRIEND"
 
 class IGUS(object):
 

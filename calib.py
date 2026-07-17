@@ -63,14 +63,14 @@ class AimMin:
             return
         src = np.array(self.pixel_pts, dtype=np.float32)
         dst = np.array(self.robot_pts, dtype=np.float32)
-        M, _ = cv2.estimateAffinePartial2D(src, dst, method=cv2.RANSAC)
+        M, _ = cv2.estimateAffine2D(src, dst, method=cv2.RANSAC)
         if M is None:
             print("Error: couldn't fit a transform.")
             return
         self.transform = M
         proj = (M @ np.hstack([src, np.ones((n, 1))]).T).T
         err = np.linalg.norm(proj - dst, axis=1)
-        print(f"\n[SOLVE] similarity on {n} pts | "
+        print(f"\n[SOLVE] affine on {n} pts | "
               f"residual {err.mean():.2f} mm mean, {err.max():.2f} mm max")
         np.save(TRANSFORM_FILE, M)
         print(f"[SOLVE] Transform saved to '{TRANSFORM_FILE}' - vision.py will pick it up.")
