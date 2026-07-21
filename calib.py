@@ -48,7 +48,7 @@ class AimMin:
             self.pixel_pts.append((x, y))
             self.robot_pts.append((rx, ry))
             print(f"Point Added {len(self.pixel_pts)}. "
-                  f"{'Ready to Solve (press s).' if len(self.pixel_pts) >= 4 else ''}")
+                  f"{'Ready to Solve (press s).' if len(self.pixel_pts) >= 6 else ''}")
         else:
             X, Y = self.pixel_to_robot(x, y)
             self.aim_marker = (x, y)
@@ -58,8 +58,8 @@ class AimMin:
     # ---- solve ----
     def solve(self):
         n = len(self.pixel_pts)
-        if n < 4:
-            print(f"Need at least 4 Points (have {n}).")
+        if n < 6:
+            print(f"Need at least 6 Points (have {n}).")
             return
         src = np.array(self.pixel_pts, dtype=np.float32)
         dst = np.array(self.robot_pts, dtype=np.float32)
