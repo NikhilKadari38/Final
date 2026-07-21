@@ -25,9 +25,11 @@ TOPIC_BASE   = f"IGUS/robot{ROBOT_NUMBER}"
 TOPIC_SORT   = TOPIC_BASE + "/sort"
 TOPIC_STATUS = TOPIC_BASE + "/status"
 
-GRASP_Z    = 156.5   # Z where suction cup touches top of box (measured)
+GRASP_Z    = 156.5   # Z where suction cup touches top of box (measured, on the pick table)
 TRAVEL_Z   = 290.0   # safe travel height — well above all boxes
 BOX_HEIGHT = 50.0    # actual box height = 5cm = 50mm
+
+STORAGE_TABLE_Z_OFFSET = 35.0  # storage table sits 35mm taller than the pick table
 
 SUCTION_CHANNEL = 31  # ToolDOut2 (DOut32) — confirmed working
 
@@ -265,7 +267,7 @@ def _move(source: igus.Cart, destination: igus.Cart,
 def pick_and_place_box(box: Box, storage_x: float, storage_y: float,
                        stack_layer: int, boxes=None, storage_pixel=None):
     pick_z  = GRASP_Z
-    place_z = GRASP_Z + stack_layer * BOX_HEIGHT
+    place_z = GRASP_Z + STORAGE_TABLE_Z_OFFSET + stack_layer * BOX_HEIGHT
 
     # Apply gripper offset correction so suction cup lands centered on box
     source      = igus.Cart(box.robot_x + GRIPPER_X_OFFSET,
